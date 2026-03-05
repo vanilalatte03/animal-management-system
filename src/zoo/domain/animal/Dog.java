@@ -2,7 +2,7 @@ package zoo.domain.animal;
 
 public class Dog extends Animal{
 
-    protected Dog(String name, int age) {
+    public Dog(String name, int age) {
         super(name, age);
     }
 
