@@ -18,8 +18,7 @@ public class Main {
 
         while (running){
             printMenu();
-            System.out.print("메뉴를 선택하세요: ");
-            int select = SCANNER.nextInt();
+            int select = readInt("메뉴를 선택하세요: ");
 
             switch (select){
                 case 1: // 동물 등록
@@ -44,6 +43,8 @@ public class Main {
                     running = false;
                     System.out.println("프로그램을 종료합니다.");
                     break;
+                default:
+                    System.out.println("잘못된 메뉴 번호입니다.");
             }
         }
     }
@@ -62,13 +63,21 @@ public class Main {
 
     // 동물 등록
     private static void registerAnimal() {
-        System.out.println("동물 이름을 입력하세요: ");
-        String name = SCANNER.next().trim();
-        System.out.println("동물 나이를 입력하세요: ");
-        int age = SCANNER.nextInt();
-        System.out.println("동물 종류를 선택하세요 (1.강아지 2.고양이): ");
-        int type = SCANNER.nextInt();
+        String name = readString("동물 이름을 입력하세요: ");
+        int age = readInt("동물 나이를 입력하세요: ");
 
+        if (age < 0) {
+            System.out.println("나이는 0보다 작을 수 없습니다.");
+            return;
+        }
+
+        int type = readInt("동물 종류를 선택하세요 (1.강아지 2.고양이): ");
+        if (type != 1 && type != 2) {
+            System.out.println("해당하는 동물 종류가 없습니다.");
+            return;
+        }
+
+        // 타입 확인 후 추가
         Animal animal = (type == 1) ? new Dog(name, age) : new Cat(name, age);
         ZOO.addAnimal(animal);
         System.out.printf("%s(%s, %d살)(이)가 등록되었습니다.\n", animal.getName(), animal.getType(), animal.getAge());
@@ -146,8 +155,7 @@ public class Main {
         }
 
         // 입력
-        System.out.println("선택: ");
-        int choice = SCANNER.nextInt();
+        int choice = readInt("선택: ");
         Animal select = ZOO.getAnimalIndex(choice - 1);
 
         if (select == null) {
@@ -155,5 +163,31 @@ public class Main {
         }
         return select;
     }
+
+    // 예외 처리: 숫자 입력
+    private static int readInt(String msg) {
+        while (true) {
+            System.out.println(msg);
+            String input = SCANNER.nextLine().trim();
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e){
+                System.out.println("숫자를 입력하세요.");
+            }
+        }
+    }
+
+    // 예외 처리: 빈 칸 방지
+    private static String readString(String msg) {
+        while (true) {
+            System.out.println(msg);
+            String input = SCANNER.nextLine().trim();
+            if (!input.isEmpty()){
+                return input;
+            }
+            System.out.println("값이 비어있습니다.");
+        }
+    }
+
 
 }
