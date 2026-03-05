@@ -31,8 +31,8 @@ public class Main {
                 case 3: // 동물과 놀기
                     playAnimal();
                     break;
-                case 4:
-
+                case 4: // 동물 밥 주기
+                    feedAnimal();
                     break;
                 case 5:
 
@@ -119,5 +119,33 @@ public class Main {
         }
     }
 
+    //동물 밥 주기
+    private static void feedAnimal(){
+        System.out.println("먹이를 줄 동물을 선택하세요.");
+
+        // 목록이 비어있는지 확인
+        if(!ZOO.checkAnimal()) {
+            System.out.println("등록된 동물이 없습니다.");
+            return;
+        }
+
+        // 동물 목록 출력
+        for (int i = 0; i < ZOO.getAnimals().size(); i++){
+            Animal animal = ZOO.getAnimals().get(i);
+            System.out.printf("%d. %s(%s, %d살)\n", i+1, animal.getName(), animal.getType(), animal.getAge() );
+        }
+
+        // 입력
+        int choice = SCANNER.nextInt();
+        Animal select = ZOO.getAnimalIndex(choice - 1);
+
+        // 선택한 동물과 놀기
+        if (select == null) {
+            System.out.println("잘못된 번호입니다.");
+        } else {
+            select.feed();
+            System.out.printf("%s에게 먹이를 주었습니다. 배고픔이 감소했습니다\n", select.getName());
+        }
+    }
 
 }
