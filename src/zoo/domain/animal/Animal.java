@@ -40,6 +40,14 @@ public abstract class Animal {
         happiness = Math.min(100, happiness + 20);
     }
 
+    // 동물 상태 확인
+    public String getStatus() {
+        return String.format(
+                "이름: %s\n종류: %s\n나이: %d살\n배고픔: %d\n행복도: %d\n",
+                name, getType(), age, hungry, happiness
+        );
+    }
+
     public abstract String getType();
 
     // 서로 다른 울음소리를 낸다
