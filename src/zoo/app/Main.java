@@ -92,106 +92,56 @@ public class Main {
 
     // 동물과 놀기
     private static void playAnimal(){
-        System.out.println("놀아줄 동물을 선택하세요.");
-
-        // 목록이 비어있는지 확인
-        if(!ZOO.checkAnimal()) {
-            System.out.println("등록된 동물이 없습니다.");
+        Animal select = selectAnimal("놀아줄 동물을 선택하세요.");
+        if (select == null) {
             return;
         }
-
-        // 동물 목록 출력
-        for (int i = 0; i < ZOO.getAnimals().size(); i++){
-            Animal animal = ZOO.getAnimals().get(i);
-            System.out.printf("%d. %s(%s, %d살)\n", i+1, animal.getName(), animal.getType(), animal.getAge() );
-        }
-
-        // 입력
-        System.out.println("선택: ");
-        int choice = SCANNER.nextInt();
-        Animal select = ZOO.getAnimalIndex(choice - 1);
-
-        // 선택한 동물과 놀기
-        if (select == null) {
-            System.out.println("잘못된 번호입니다.");
-        } else {
-            select.play();
-            System.out.printf("%s와(과) 놀았습니다. 행복도가 증가했습니다\n", select.getName());
-        }
+        select.play();
+        System.out.printf("%s와(과) 놀았습니다. 행복도가 증가했습니다\n", select.getName());
     }
 
     //동물 밥 주기
     private static void feedAnimal(){
-        System.out.println("먹이를 줄 동물을 선택하세요.");
-
-        // 목록이 비어있는지 확인
-        if(!ZOO.checkAnimal()) {
-            System.out.println("등록된 동물이 없습니다.");
+        Animal select = selectAnimal("먹이를 줄 동물을 선택하세요.");
+        if (select == null) {
             return;
         }
-
-        // 동물 목록 출력
-        for (int i = 0; i < ZOO.getAnimals().size(); i++){
-            Animal animal = ZOO.getAnimals().get(i);
-            System.out.printf("%d. %s(%s, %d살)\n", i+1, animal.getName(), animal.getType(), animal.getAge() );
-        }
-
-        // 입력
-        System.out.println("선택: ");
-        int choice = SCANNER.nextInt();
-        Animal select = ZOO.getAnimalIndex(choice - 1);
-
-        // 선택한 동물 먹이 주기
-        if (select == null) {
-            System.out.println("잘못된 번호입니다.");
-        } else {
-            select.feed();
-            System.out.printf("%s에게 먹이를 주었습니다. 배고픔이 감소했습니다\n", select.getName());
-        }
+        select.feed();
+        System.out.printf("%s에게 먹이를 주었습니다. 배고픔이 감소했습니다\n", select.getName());
     }
 
     //동물 상태 확인
     private static void printAnimalStatus() {
-        System.out.println("상태를 확인할 동물을 선택하세요.");
-
-        // 목록이 비어있는지 확인
-        if(!ZOO.checkAnimal()) {
-            System.out.println("등록된 동물이 없습니다.");
+        Animal select = selectAnimal("상태를 확인할 동물을 선택하세요.");
+        if (select == null) {
             return;
         }
-
-        // 동물 목록 출력
-        for (int i = 0; i < ZOO.getAnimals().size(); i++){
-            Animal animal = ZOO.getAnimals().get(i);
-            System.out.printf("%d. %s(%s, %d살)\n", i+1, animal.getName(), animal.getType(), animal.getAge() );
-        }
-
-        // 입력
-        System.out.println("선택: ");
-        int choice = SCANNER.nextInt();
-        Animal select = ZOO.getAnimalIndex(choice - 1);
-
-        // 선택한 동물 상태 확인 하기
-        if (select == null) {
-            System.out.println("잘못된 번호입니다.");
-        } else {
-            System.out.printf(select.getStatus());
-        }
+        System.out.printf(select.getStatus());
     }
 
     // 울음 소리 듣기
     private static void hearAnimalSound() {
-        System.out.println("울음 소리를 들을 동물을 선택하세요.");
+        Animal select = selectAnimal("울음 소리를 들을 동물을 선택하세요.");
+        if (select == null) {
+            return;
+        }
+        System.out.printf("%s: %s\n", select.getName(), select.makeSound());
+    }
 
+    // 동물을 선택하고 반환
+    private static Animal selectAnimal(String msg) {
         // 목록이 비어있는지 확인
         if(!ZOO.checkAnimal()) {
             System.out.println("등록된 동물이 없습니다.");
-            return;
+            return null;
         }
+
+        //상황에 맞는 메세지 출력
+        System.out.println(msg);
 
         // 동물 목록 출력
         for (int i = 0; i < ZOO.getAnimals().size(); i++){
-            Animal animal = ZOO.getAnimals().get(i);
+            Animal animal = ZOO.getAnimalIndex(i);
             System.out.printf("%d. %s(%s, %d살)\n", i+1, animal.getName(), animal.getType(), animal.getAge() );
         }
 
@@ -200,12 +150,10 @@ public class Main {
         int choice = SCANNER.nextInt();
         Animal select = ZOO.getAnimalIndex(choice - 1);
 
-        // 선택한 동물 울음 소리 듣기
         if (select == null) {
             System.out.println("잘못된 번호입니다.");
-        } else {
-            System.out.printf("%s: %s\n", select.getName(), select.makeSound());
         }
+        return select;
     }
 
 }
