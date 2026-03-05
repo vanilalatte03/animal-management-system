@@ -1,0 +1,68 @@
+package zoo.app;
+
+import zoo.domain.animal.Animal;
+import zoo.domain.animal.Cat;
+import zoo.domain.animal.Dog;
+import zoo.service.Zoo;
+
+import java.util.Scanner;
+
+public class Main {
+    public static final Scanner SCANNER = new Scanner(System.in);
+    // 동물 저장,조회 전역 변수
+    public static final Zoo ZOO = new Zoo();
+
+    // 프로그램 시작
+    public static void main(String[] args) {
+        boolean running = true;
+
+        while (running){
+            printMenu();
+            System.out.print("메뉴를 선택하세요: ");
+            int select = SCANNER.nextInt();
+
+            switch (select){
+                case 1: // 동물 등록
+                    registerAnimal();
+                    break;
+                case 2: // 동물 목록
+
+                    break;
+
+                case 7: //종료
+                    running = false;
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+            }
+        }
+    }
+
+    // 메뉴 출력
+    private static void printMenu() {
+        System.out.println("=== 동물원 관리 시스템 ===\n" +
+                "1. 동물 등록\n" +
+                "2. 동물 목록 보기\n" +
+                "3. 동물과 놀기\n" +
+                "4. 먹이주기\n" +
+                "5. 동물 상태 확인\n" +
+                "6. 울음소리 듣기\n" +
+                "7. 종료");
+    }
+
+    // 동물 등록
+    private static void registerAnimal() {
+        System.out.println("동물 이름을 입력하세요: ");
+        String name = SCANNER.nextLine().trim();
+        System.out.println("동물 나이를 입력하세요: ");
+        int age = SCANNER.nextInt();
+        System.out.println("동물 종류를 선택하세요 (1.강아지 2.고양이): ");
+        int type = SCANNER.nextInt();
+
+        Animal animal = (type == 1) ? new Dog(name, age) : new Cat(name, age);
+        ZOO.addAnimal(animal);
+        System.out.printf("%s(%s, %d살)가 등록되었습니다.", animal.getName(), animal.getType(), animal.getAge());
+    }
+
+
+
+}
