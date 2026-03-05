@@ -25,9 +25,10 @@ public class Main {
                 case 1: // 동물 등록
                     registerAnimal();
                     break;
-                case 2: // 동물 목록
-
+                case 2: // 동물 목록 조회
+                    printAnimalList();
                     break;
+
 
                 case 7: //종료
                     running = false;
@@ -52,7 +53,7 @@ public class Main {
     // 동물 등록
     private static void registerAnimal() {
         System.out.println("동물 이름을 입력하세요: ");
-        String name = SCANNER.nextLine().trim();
+        String name = SCANNER.next().trim();
         System.out.println("동물 나이를 입력하세요: ");
         int age = SCANNER.nextInt();
         System.out.println("동물 종류를 선택하세요 (1.강아지 2.고양이): ");
@@ -60,7 +61,21 @@ public class Main {
 
         Animal animal = (type == 1) ? new Dog(name, age) : new Cat(name, age);
         ZOO.addAnimal(animal);
-        System.out.printf("%s(%s, %d살)가 등록되었습니다.", animal.getName(), animal.getType(), animal.getAge());
+        System.out.printf("%s(%s, %d살)가 등록되었습니다.\n", animal.getName(), animal.getType(), animal.getAge());
+    }
+
+    // 동물 목록 조회
+    private static void printAnimalList() {
+        if(!ZOO.checkAnimal()) {
+            System.out.println("등록된 동물이 없습니다.");
+            return;
+        }
+
+        System.out.println("=== 동물 목록 ===");
+        for (int i = 0; i < ZOO.getAnimals().size(); i++){
+            Animal animal = ZOO.getAnimals().get(i);
+            System.out.printf("%d. %s(%s, %d살)\n", i+1, animal.getName(), animal.getType(), animal.getAge() );
+        }
     }
 
 
