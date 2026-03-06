@@ -2,21 +2,21 @@ package zoo.domain.animal;
 
 import zoo.domain.ability.Biteable;
 
-// 강아지
-public class Dog extends Mammal implements Biteable {
+// 뱀
+public class Snake extends Reptile implements Biteable {
 
-    public Dog(String name, int age) {
+    protected Snake(String name, int age) {
         super(name, age);
     }
 
     @Override
     public String getType() {
-        return "강아지";
+        return "뱀";
     }
 
     @Override
     public String makeSound() {
-        return "멍멍!";
+        return "쉬익~";
     }
 
     @Override
@@ -34,5 +34,4 @@ public class Dog extends Mammal implements Biteable {
     public String specialAbilityName() {
         return "물기 능력";
     }
-
 }

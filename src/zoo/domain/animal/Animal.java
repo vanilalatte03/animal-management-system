@@ -10,7 +10,7 @@ public abstract class Animal {
     protected Animal(String name, int age) {
         this.name = name;
         this.age = age;
-        this.hungry = 50;
+        this.hungry = 40;
         this.happiness = 50;
     }
 
@@ -37,7 +37,12 @@ public abstract class Animal {
 
     // 놀아주기: 행복도 +20
     public void play() {
-        happiness = Math.min(100, happiness + 20);
+        happiness = Math.min(100, happiness + 10);
+    }
+
+    // 특별 능력 사용 시 행복도 증가
+    public void happy(int amount) {
+        happiness = Math.min(100, happiness + Math.max(0, amount));
     }
 
     // 동물 상태 확인
@@ -53,9 +58,11 @@ public abstract class Animal {
     // 서로 다른 울음소리를 낸다
     public abstract String makeSound();
 
-    // 고유 능력
+    // 특별 능력 구현
     public abstract String specialAbility();
 
+    // 특별 능력 이름
+    public abstract String specialAbilityName();
 
 
 
