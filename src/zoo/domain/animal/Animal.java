@@ -1,5 +1,7 @@
 package zoo.domain.animal;
 
+import zoo.domain.food.Food;
+
 public abstract class Animal {
     // 동물은 이름, 나이, 배고픔 수치, 행복도를 가진다
     private final String name;
@@ -64,6 +66,8 @@ public abstract class Animal {
     // 특별 능력 이름
     public abstract String specialAbilityName();
 
+    // 동물 종마다 선호
+    public abstract Food preferredFood();
 
 
 }

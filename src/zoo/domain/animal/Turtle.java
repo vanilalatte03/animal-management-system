@@ -1,6 +1,7 @@
 package zoo.domain.animal;
 
 import zoo.domain.ability.Swimmable;
+import zoo.domain.food.Food;
 
 // 거북이
 public class Turtle extends Reptile implements Swimmable {
@@ -33,6 +34,11 @@ public class Turtle extends Reptile implements Swimmable {
     @Override
     public String specialAbilityName() {
         return "수영 능력";
+    }
+
+    @Override
+    public Food preferredFood() {
+        return Food.NUTS;
     }
 
 }

@@ -1,6 +1,7 @@
 package zoo.domain.animal;
 
 import zoo.domain.ability.Biteable;
+import zoo.domain.food.Food;
 
 // 강아지
 public class Dog extends Mammal implements Biteable {
@@ -33,6 +34,11 @@ public class Dog extends Mammal implements Biteable {
     @Override
     public String specialAbilityName() {
         return "물기 능력";
+    }
+
+    @Override
+    public Food preferredFood() {
+        return Food.MEAT;
     }
 
 }

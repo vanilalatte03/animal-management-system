@@ -1,6 +1,7 @@
 package zoo.domain.animal;
 
 import zoo.domain.ability.Flyable;
+import zoo.domain.food.Food;
 
 // 독수리
 public class Eagle extends Bird implements Flyable {
@@ -33,5 +34,10 @@ public class Eagle extends Bird implements Flyable {
     @Override
     public String specialAbilityName() {
         return "비행 능력";
+    }
+
+    @Override
+    public Food preferredFood() {
+        return Food.FISH;
     }
 }

@@ -1,6 +1,7 @@
 package zoo.domain.animal;
 
 import zoo.domain.ability.Scratchable;
+import zoo.domain.food.Food;
 
 // 고양이
 public class Cat extends Mammal implements Scratchable {
@@ -33,6 +34,11 @@ public class Cat extends Mammal implements Scratchable {
     @Override
     public String specialAbilityName() {
         return "긁기 능력";
+    }
+
+    @Override
+    public Food preferredFood() {
+        return Food.FISH;
     }
 
 }

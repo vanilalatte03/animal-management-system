@@ -1,6 +1,7 @@
 package zoo.domain.animal;
 
 import zoo.domain.ability.Sprayable;
+import zoo.domain.food.Food;
 
 // 코끼리
 public class Elephant extends Mammal implements Sprayable {
@@ -33,6 +34,11 @@ public class Elephant extends Mammal implements Sprayable {
     @Override
     public String specialAbilityName() {
         return "물 뿌리기 능력";
+    }
+
+    @Override
+    public Food preferredFood() {
+        return Food.PLANT;
     }
 }
 
