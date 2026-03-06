@@ -5,7 +5,7 @@ import zoo.domain.ability.Scratchable;
 // 사자
 public class Lion extends Mammal implements Scratchable {
 
-    protected Lion(String name, int age) {
+    public Lion(String name, int age) {
         super(name, age);
     }
 

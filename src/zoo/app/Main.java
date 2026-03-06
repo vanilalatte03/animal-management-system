@@ -1,8 +1,7 @@
 package zoo.app;
 
-import zoo.domain.animal.Animal;
-import zoo.domain.animal.Cat;
-import zoo.domain.animal.Dog;
+import org.w3c.dom.ls.LSOutput;
+import zoo.domain.animal.*;
 import zoo.service.Zoo;
 
 import java.util.Scanner;
@@ -33,13 +32,16 @@ public class Main {
                 case 4: // 동물 밥 주기
                     feedAnimal();
                     break;
-                case 5: //동물 상태 확인
+                case 5: // 특별 능력 사용
+                    useSpecialAbility();
+                    break;
+                case 6: // 동물 상태 확인
                     printAnimalStatus();
                     break;
-                case 6: //울음 소리 듣기
+                case 7: // 울음 소리 듣기
                     hearAnimalSound();
                     break;
-                case 7: //종료
+                case 8: // 종료
                     running = false;
                     System.out.println("프로그램을 종료합니다.");
                     break;
@@ -49,6 +51,7 @@ public class Main {
         }
     }
 
+
     // 메뉴 출력
     private static void printMenu() {
         System.out.println("=== 동물원 관리 시스템 ===\n" +
@@ -56,9 +59,10 @@ public class Main {
                 "2. 동물 목록 보기\n" +
                 "3. 동물과 놀기\n" +
                 "4. 먹이주기\n" +
-                "5. 동물 상태 확인\n" +
-                "6. 울음소리 듣기\n" +
-                "7. 종료");
+                "5. 특별 능력 사용\n" +
+                "6. 동물 상태 확인\n" +
+                "7. 울음소리 듣기\n" +
+                "8. 종료");
     }
 
     // 동물 등록
@@ -71,14 +75,15 @@ public class Main {
             return;
         }
 
-        int type = readInt("동물 종류를 선택하세요 (1.강아지 2.고양이): ");
-        if (type != 1 && type != 2) {
+        printAnimalType();
+        int type = readInt("동물 종류를 선택하세요: ");
+        if (type < 1 || type > 8) {
             System.out.println("해당하는 동물 종류가 없습니다.");
             return;
         }
 
         // 타입 확인 후 추가
-        Animal animal = (type == 1) ? new Dog(name, age) : new Cat(name, age);
+        Animal animal = createAnimal(type, name, age);
         ZOO.addAnimal(animal);
         System.out.printf("%s(%s, %d살)(이)가 등록되었습니다.\n", animal.getName(), animal.getType(), animal.getAge());
     }
@@ -109,7 +114,7 @@ public class Main {
         System.out.printf("%s와(과) 놀았습니다. 행복도가 증가했습니다\n", select.getName());
     }
 
-    //동물 밥 주기
+    // 동물 밥 주기
     private static void feedAnimal(){
         Animal select = selectAnimal("먹이를 줄 동물을 선택하세요.");
         if (select == null) {
@@ -119,7 +124,16 @@ public class Main {
         System.out.printf("%s에게 먹이를 주었습니다. 배고픔이 감소했습니다\n", select.getName());
     }
 
-    //동물 상태 확인
+    // 특별 능력 사용
+    private static void useSpecialAbility() {
+        Animal select = selectAnimal("특별 능력을 사용할 동물을 선택하세요.");
+        if (select == null) {
+            return;
+        }
+        System.out.println(select.specialAbility());
+    }
+
+    // 동물 상태 확인
     private static void printAnimalStatus() {
         Animal select = selectAnimal("상태를 확인할 동물을 선택하세요.");
         if (select == null) {
@@ -145,7 +159,7 @@ public class Main {
             return null;
         }
 
-        //상황에 맞는 메세지 출력
+        // 상황에 맞는 메세지 출력
         System.out.println(msg);
 
         // 동물 목록 출력
@@ -164,10 +178,48 @@ public class Main {
         return select;
     }
 
+    // 동물 종류 선택 메뉴
+    private static void printAnimalType(){
+        System.out.println("=== 동물 종류 ===\n" +
+                "1. 강아지\n" +
+                "2. 고양이\n" +
+                "3. 독수리\n" +
+                "4. 펭귄\n" +
+                "5. 사자\n" +
+                "6. 코끼리\n" +
+                "7. 뱀\n" +
+                "8. 거북이");
+    }
+
+    // 동물 생성
+    public static Animal createAnimal(int type, String name, int age){
+        switch (type) {
+            case 1:
+                return new Dog(name, age);
+            case 2:
+                return new Cat(name, age);
+            case 3:
+                return new Eagle(name, age);
+            case 4:
+                return new Penguin(name, age);
+            case 5:
+                return new Lion(name, age);
+            case 6:
+                return new Elephant(name, age);
+            case 7:
+                return new Snake(name, age);
+            case 8:
+                return new Turtle(name, age);
+            default: //여기는 올 일 없음
+                return null;
+        }
+    }
+
+
     // 예외 처리: 숫자 입력
     private static int readInt(String msg) {
         while (true) {
-            System.out.println(msg);
+            System.out.print(msg);
             String input = SCANNER.nextLine().trim();
             try {
                 return Integer.parseInt(input);
@@ -180,7 +232,7 @@ public class Main {
     // 예외 처리: 빈 칸 방지
     private static String readString(String msg) {
         while (true) {
-            System.out.println(msg);
+            System.out.print(msg);
             String input = SCANNER.nextLine().trim();
             if (!input.isEmpty()){
                 return input;
@@ -188,6 +240,4 @@ public class Main {
             System.out.println("값이 비어있습니다.");
         }
     }
-
-
 }

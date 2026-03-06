@@ -5,7 +5,7 @@ import zoo.domain.ability.Sprayable;
 // 코끼리
 public class Elephant extends Mammal implements Sprayable {
 
-    protected Elephant(String name, int age) {
+    public Elephant(String name, int age) {
         super(name, age);
     }
 

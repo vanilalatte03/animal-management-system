@@ -4,7 +4,7 @@ import zoo.domain.ability.Swimmable;
 
 public class Penguin extends Bird implements Swimmable {
 
-    protected Penguin(String name, int age) {
+    public Penguin(String name, int age) {
         super(name, age);
     }
 

@@ -5,7 +5,7 @@ import zoo.domain.ability.Swimmable;
 // 거북이
 public class Turtle extends Reptile implements Swimmable {
 
-    protected Turtle(String name, int age) {
+    public Turtle(String name, int age) {
         super(name, age);
     }
 

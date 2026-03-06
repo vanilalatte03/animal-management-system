@@ -5,7 +5,7 @@ import zoo.domain.ability.Biteable;
 // 뱀
 public class Snake extends Reptile implements Biteable {
 
-    protected Snake(String name, int age) {
+    public Snake(String name, int age) {
         super(name, age);
     }
 

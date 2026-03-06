@@ -5,7 +5,7 @@ import zoo.domain.ability.Flyable;
 // 독수리
 public class Eagle extends Bird implements Flyable {
 
-    protected Eagle(String name, int age) {
+    public Eagle(String name, int age) {
         super(name, age);
     }
 
