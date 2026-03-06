@@ -53,4 +53,10 @@ public abstract class Animal {
     // 서로 다른 울음소리를 낸다
     public abstract String makeSound();
 
+    // 고유 능력
+    public abstract String specialAbility();
+
+
+
+
 }

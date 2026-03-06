@@ -1,6 +1,7 @@
 package zoo.domain.animal;
 
-public class Dog extends Animal{
+// 강아지
+public class Dog extends Mammal{
 
     public Dog(String name, int age) {
         super(name, age);
@@ -14,5 +15,10 @@ public class Dog extends Animal{
     @Override
     public String makeSound() {
         return "멍멍!";
+    }
+
+    @Override
+    public String specialAbility() {
+        return "";
     }
 }
