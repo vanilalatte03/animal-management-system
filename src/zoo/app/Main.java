@@ -126,7 +126,7 @@ public class Main {
 
     // 특별 능력 사용
     private static void useSpecialAbility() {
-        Animal select = selectAnimal("특별 능력을 사용할 동물을 선택하세요.");
+        Animal select = selectSpecialAbility("특별 능력을 사용할 동물을 선택하세요.");
         if (select == null) {
             return;
         }
@@ -176,6 +176,37 @@ public class Main {
             System.out.println("잘못된 번호입니다.");
         }
         return select;
+    }
+
+    // 동물을 선택하고 반환
+    private static Animal selectSpecialAbility(String msg) {
+        // 목록이 비어있는지 확인
+        if(!ZOO.checkAnimal()) {
+            System.out.println("등록된 동물이 없습니다.");
+            return null;
+        }
+
+        System.out.println(msg);
+
+        // 동물 목록 출력
+        for (int i = 0; i < ZOO.getAnimals().size(); i++){
+            Animal animal = ZOO.getAnimalIndex(i);
+            System.out.printf("%d. %s(%s) - %s\n",
+                    i+1,
+                    animal.getName(),
+                    animal.getType(),
+                    animal.specialAbilityName() );
+        }
+
+        // 입력
+        int choice = readInt("선택: ");
+
+        if (choice < 1 || choice > ZOO.getAnimals().size()) {
+            System.out.println("잘못된 번호입니다.");
+            return null;
+        }
+
+        return ZOO.getAnimalIndex(choice - 1);
     }
 
     // 동물 종류 선택 메뉴
